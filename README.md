@@ -9,6 +9,12 @@ You can then listen to such event to perform any kind of operation.
 
 It requires just React.js and ReactDOM.
 
+Install it with
+
+```
+npm install react-resize-aware --save
+```
+
 # License
 
 MIT License
