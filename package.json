@@ -1,0 +1,29 @@
+{
+  "name": "react-resize-aware",
+  "version": "1.0.0",
+  "description": "A resize aware component used to detect sizes changes on your components",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/FezVrasta/react-resize-aware.git"
+  },
+  "keywords": [
+    "react",
+    "resize",
+    "element",
+    "queries",
+    "media",
+    "query",
+    "element",
+    "query"
+  ],
+  "author": "Federico Zivolo <federico.zivolo@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/FezVrasta/react-resize-aware/issues"
+  },
+  "homepage": "https://github.com/FezVrasta/react-resize-aware#readme"
+}
