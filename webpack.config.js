@@ -1,3 +1,4 @@
+var webpack = require('webpack')
 var Path = require('path')
 
 module.exports = {
@@ -28,5 +29,13 @@ module.exports = {
         loose: 'all'
       }
     }]
-  }
+  },
+
+  plugins: [
+    new webpack.DefinePlugin({
+      'process.env': {
+        'NODE_ENV': JSON.stringify('production')
+      }
+    })
+  ]
 }

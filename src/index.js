@@ -6,49 +6,9 @@
 // Copyright 2016, Federico Zivolo
 //
 
-let React = require('react')
-let findDOMNode = require('react-dom').findDOMNode
+import { Component } from 'react'
 
-// cross browser requestAnimationFrame
-const requestFrame = (function(){
-  let raf = (
-    window.requestAnimationFrame ||
-    window.mozRequestAnimationFrame ||
-    window.webkitRequestAnimationFrame ||
-    function(fn) { return window.setTimeout(fn, 20) }
-  )
-  return function(fn) {
-    return raf(fn)
-  }
-})()
-
-// cross browser cancelAnimationFrame
-const cancelFrame = (function(){
-  var cancel = (
-    window.cancelAnimationFrame ||
-    window.mozCancelAnimationFrame ||
-    window.webkitCancelAnimationFrame ||
-    window.clearTimeout
-  )
-  return function(id) {
-    return cancel(id)
-  }
-})()
-
-function resizeListener(e) {
-  let win = e.target || e.srcElement;
-  if (win.__resizeRAF__) {
-    cancelFrame(win.__resizeRAF__)
-  }
-  win.__resizeRAF__ = requestFrame(function() {
-    let trigger = win.__resizeTrigger__
-    trigger.__resizeListeners__.forEach(function(fn) {
-      fn.call(trigger, e)
-    })
-  })
-}
-
-let ResizeAware = React.createClass({
+export default class ResizeAware extends Component {
   render() {
     let rootStyle = this.props.style
     if (rootStyle.position === 'initial') {
@@ -67,7 +27,7 @@ let ResizeAware = React.createClass({
     }
 
     return (
-      <div {...this.props} style={rootStyle}>
+      <div ref='container' {...this.props} style={rootStyle}>
         {this.props.children}
         <object
           type='text/html'
@@ -76,23 +36,23 @@ let ResizeAware = React.createClass({
           onLoad={ (e) => { this.objectLoad(e) } } />
       </div>
     )
-  },
+  }
 
   componentDidMount() {
     // init the resizeElement
     this.refs.resizeElement.data = 'about:blank'
-  },
+  }
 
   componentWillUnmount() {
     this.state.resizeTarget.removeEventListener('resize', this.state.resizeFn)
-  },
+  }
 
   // function called on component resize
   // a `resize` event will be triggered on the component
   onResize(evt) {
     var event = new Event('resize')
-    findDOMNode(this).dispatchEvent(event)
-  },
+    this.refs.container.dispatchEvent(event)
+  }
 
   // called when the object is loaded
   objectLoad(evt) {
@@ -103,6 +63,5 @@ let ResizeAware = React.createClass({
       this.state.resizeTarget.addEventListener('resize', this.state.resizeFn)
     })
   }
-})
 
-module.exports = ResizeAware
+}
