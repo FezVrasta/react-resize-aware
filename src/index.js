@@ -1,12 +1,13 @@
 //
-// OnComponentResize component
+// react-resize-aware component
 //
 // Triggers a `resize` event everytime the component changes its sizes
-// React Component by Federico Zivolo
+// MIT License
+// Copyright 2016, Federico Zivolo
 //
 
-import React, { Component } from 'react'
-import { findDOMNode } from 'react-dom'
+let React = require('react')
+let findDOMNode = require('react-dom').findDOMNode
 
 // cross browser requestAnimationFrame
 const requestFrame = (function(){
@@ -47,7 +48,7 @@ function resizeListener(e) {
   })
 }
 
-export default class OnComponentResize extends Component {
+let ResizeAware = React.createClass({
   render() {
     let rootStyle = this.props.style
     if (rootStyle.position === 'initial') {
@@ -75,24 +76,23 @@ export default class OnComponentResize extends Component {
           onLoad={ (e) => { this.objectLoad(e) } } />
       </div>
     )
-  }
+  },
 
   componentDidMount() {
     // init the resizeElement
     this.refs.resizeElement.data = 'about:blank'
-  }
+  },
 
   componentWillUnmount() {
     this.state.resizeTarget.removeEventListener('resize', this.state.resizeFn)
-  }
+  },
 
   // function called on component resize
   // a `resize` event will be triggered on the component
   onResize(evt) {
     var event = new Event('resize')
-    console.log(findDOMNode(this))
     findDOMNode(this).dispatchEvent(event)
-  }
+  },
 
   // called when the object is loaded
   objectLoad(evt) {
@@ -102,7 +102,7 @@ export default class OnComponentResize extends Component {
     }, function() {
       this.state.resizeTarget.addEventListener('resize', this.state.resizeFn)
     })
-
   }
+})
 
-}
+module.exports = ResizeAware

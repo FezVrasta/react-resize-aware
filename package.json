@@ -2,9 +2,9 @@
   "name": "react-resize-aware",
   "version": "1.0.0",
   "description": "A resize aware component used to detect sizes changes on your components",
-  "main": "index.js",
+  "main": "dist/resizeAware.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "prepublish": "webpack -p && echo `gzip -c dist/ink.js | wc -c`"
   },
   "repository": {
     "type": "git",
@@ -25,5 +25,12 @@
   "bugs": {
     "url": "https://github.com/FezVrasta/react-resize-aware/issues"
   },
-  "homepage": "https://github.com/FezVrasta/react-resize-aware#readme"
+  "homepage": "https://github.com/FezVrasta/react-resize-aware#readme",
+  "devDependencies": {
+    "babel-core": "~5",
+    "babel-loader": "~5",
+    "react": "~15.0.1",
+    "react-dom": "~15.0.1",
+    "webpack": "~1"
+  }
 }
