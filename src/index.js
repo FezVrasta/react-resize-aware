@@ -6,7 +6,7 @@
 // Copyright 2016, Federico Zivolo
 //
 
-import { Component } from 'react'
+import React, { Component } from 'react'
 
 export default class ResizeAware extends Component {
   constructor() {
