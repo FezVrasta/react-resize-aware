@@ -10,7 +10,7 @@ import { Component } from 'react'
 
 export default class ResizeAware extends Component {
   render() {
-    let rootStyle = this.props.style
+    let rootStyle = this.props.style || {}
     if (rootStyle.position === 'initial') {
       rootStyle.position = 'relative'
     }
