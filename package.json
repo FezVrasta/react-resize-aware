@@ -1,10 +1,10 @@
 {
   "name": "react-resize-aware",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A resize aware component used to detect sizes changes on your components",
   "main": "dist/resizeAware.js",
   "scripts": {
-    "prepublish": "webpack -p && echo `gzip -c dist/ink.js | wc -c`"
+    "prepublish": "webpack -p && echo `gzip -c dist/resizeAware.js | wc -c`"
   },
   "repository": {
     "type": "git",
