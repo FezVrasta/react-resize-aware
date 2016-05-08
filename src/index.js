@@ -9,6 +9,10 @@
 import { Component } from 'react'
 
 export default class ResizeAware extends Component {
+  constructor() {
+    super()
+    this.state = {}
+  }
   render() {
     let rootStyle = this.props.style || {}
     if (rootStyle.position === 'initial') {
@@ -44,7 +48,7 @@ export default class ResizeAware extends Component {
   }
 
   componentWillUnmount() {
-    this.state.resizeTarget.removeEventListener('resize', this.state.resizeFn)
+    this.state.resizeTarget && this.state.resizeTarget.removeEventListener('resize', this.state.resizeFn)
   }
 
   // function called on component resize
