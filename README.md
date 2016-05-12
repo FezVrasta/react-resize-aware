@@ -12,13 +12,16 @@ It takes advantage of the `resize` event of the `<object>` HTML element.
 
 It requires just React.js and ReactDOM.
 
-Install it with
+Install it with:
 
 ```
 npm install react-resize-aware --save
 ```
 
 # Usage
+
+> **note**: `ResizeAware` needs a position different from `initial` to work!
+> Make sure to set it to `relative`, `absolute` or `fixed` trough `style` or CSS
 
 ```jsx
 import React, { Component } from 'react'
@@ -28,7 +31,7 @@ import ResizeAware from 'react-resize-aware'
 export default class FooBar extends Component {
   render() {
     return (
-      <ResizeWare ref='container'>
+      <ResizeWare ref='container' style={{position: 'relative'}}>
         Hello, World!
       </ResizeAware>
     )
