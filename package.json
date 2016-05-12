@@ -18,7 +18,8 @@
     "media",
     "query",
     "element",
-    "query"
+    "query",
+    "react-component"
   ],
   "author": "Federico Zivolo <federico.zivolo@gmail.com>",
   "license": "MIT",
