@@ -20,7 +20,7 @@ npm install react-resize-aware --save
 
 # Usage
 
-> **note**: `ResizeAware` needs a position different from `initial` to work!
+> **note**: `ResizeAware` needs a position different from `initial` to work!  
 > Make sure to set it to `relative`, `absolute` or `fixed` trough `style` or CSS
 
 ```jsx
