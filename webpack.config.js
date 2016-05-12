@@ -9,7 +9,7 @@ module.exports = {
   output: {
     libraryTarget: 'commonjs2',
     path: Path.resolve(__dirname, 'dist'),
-    filename: 'resizeAware.js'
+    filename: 'ResizeAware.js'
   },
 
   externals: {
