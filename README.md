@@ -31,7 +31,7 @@ import ResizeAware from 'react-resize-aware'
 export default class FooBar extends Component {
   render() {
     return (
-      <ResizeWare ref='container' style={{position: 'relative'}}>
+      <ResizeAware ref='container' style={{position: 'relative'}}>
         Hello, World!
       </ResizeAware>
     )
