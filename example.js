@@ -12,7 +12,7 @@ export default class FooBar extends Component {
   }
 
   componentDidMount() {
-    findDOMNode(this.refs.container).addEventListener((evt) => {
+    findDOMNode(this.refs.container).addEventListener('resize', (evt) => {
       console.log('Component has been resized!')
     })
   }
