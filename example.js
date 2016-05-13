@@ -5,7 +5,7 @@ import ResizeAware from 'react-resize-aware'
 export default class FooBar extends Component {
   render() {
     return (
-      <ResizeWare ref='container'>
+      <ResizeAware ref='container'>
         Hello, World!
       </ResizeAware>
     )
