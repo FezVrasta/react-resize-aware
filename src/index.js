@@ -54,7 +54,8 @@ export default class ResizeAware extends Component {
   // function called on component resize
   // a `resize` event will be triggered on the component
   onResize(evt) {
-    var event = new Event('resize')
+    var event = document.createEvent('Event');
+    event.initEvent('resize', true, true);
     this.refs.container.dispatchEvent(event)
   }
 
