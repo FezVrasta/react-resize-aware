@@ -11,8 +11,9 @@ import React, { Component } from 'react'
 export default class ResizeAware extends Component {
   constructor() {
     super()
-    this.state = {}
+    this.state = { resizeTarget: undefined }
   }
+  
   render() {
     let rootStyle = this.props.style || {}
     if (rootStyle.position === 'initial') {
@@ -31,7 +32,7 @@ export default class ResizeAware extends Component {
     }
 
     return (
-      <div ref='container' {...this.props} style={rootStyle}>
+      <div style={rootStyle}>
         {this.props.children}
         <object
           type='text/html'
@@ -48,25 +49,21 @@ export default class ResizeAware extends Component {
   }
 
   componentWillUnmount() {
-    this.state.resizeTarget && this.state.resizeTarget.removeEventListener('resize', this.state.resizeFn)
-  }
-
-  // function called on component resize
-  // a `resize` event will be triggered on the component
-  onResize(evt) {
-    var event = document.createEvent('Event');
-    event.initEvent('resize', true, true);
-    this.refs.container.dispatchEvent(event)
+    this.state.resizeTarget && this.state.resizeTarget.removeEventListener('resize', this.props.onResize)
   }
 
   // called when the object is loaded
   objectLoad(evt) {
     this.setState({
-      resizeTarget: evt.target.contentDocument.defaultView,
-      resizeFn: this.onResize.bind(this)
-    }, function() {
-      this.state.resizeTarget.addEventListener('resize', this.state.resizeFn)
+      resizeTarget: evt.target.contentDocument.defaultView
+    }, () => {
+      // the onResize prop is triggered on every 'resize' event
+      this.state.resizeTarget && this.state.resizeTarget.addEventListener('resize', this.props.onResize)
     })
   }
 
+}
+
+ResizeAware.propTypes = {
+  onResize: React.PropTypes.func.isRequired
 }
