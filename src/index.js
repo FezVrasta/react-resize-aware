@@ -32,7 +32,7 @@ export default class ResizeAware extends Component {
     }
 
     return (
-      <div ref='container' {...this.props} style={rootStyle}>
+      <div style={rootStyle}>
         {this.props.children}
         <object
           type='text/html'
