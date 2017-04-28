@@ -34,13 +34,19 @@ function MyComponent({width, height}) {
 
 function App() {
   return (
-    <ResizeAware>
+    <ResizeAware onResize={({width, height}) => console.log(width, height)}>
       <MyComponent />
     </ResizeAware>
   );
 }
 
 ```
+
+The child component of `ResizeAware` will have two new properties (`width` and `height`)
+always up to date with the real size of the element.
+
+Also, you can define an optional `onResize` property to make `ResizeAware` call
+it on each resize and get the updated sizes.
 
 
 # License

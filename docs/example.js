@@ -11,8 +11,13 @@ function MyComponent({width, height}) {
 function App() {
   return React.createElement(
     ReactResizeAware,
-    {style: {position: 'relative'}},
-    React.createElement(MyComponent)
+    {
+      style: {position: 'relative'},
+      onResize(sizes) {
+        console.log(sizes);
+      },
+    },
+    React.createElement(MyComponent, null)
   );
 }
 

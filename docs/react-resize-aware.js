@@ -61,10 +61,12 @@ var ResizeAware = function (_Component) {
         _this.handleResize();
       });
     }, _this.handleResize = function () {
-      _this.setState({
+      var sizes = {
         width: _this.container.offsetWidth,
         height: _this.container.offsetHeight
-      });
+      };
+      _this.setState(sizes);
+      _this.props.onResize && _this.props.onResize(sizes);
     }, _temp), _possibleConstructorReturn(_this, _ret);
   }
 
@@ -94,7 +96,8 @@ var ResizeAware = function (_Component) {
 
       var _props = this.props,
           children = _props.children,
-          props = _objectWithoutProperties(_props, ['children']);
+          onResize = _props.onResize,
+          props = _objectWithoutProperties(_props, ['children', 'onResize']);
 
       var _state = this.state,
           width = _state.width,

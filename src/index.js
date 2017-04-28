@@ -51,14 +51,16 @@ export default class ResizeAware extends Component {
 
   // Function called on component resize
   handleResize = () => {
-    this.setState({
+    const sizes = {
       width: this.container.offsetWidth,
       height: this.container.offsetHeight,
-    });
+    };
+    this.setState(sizes);
+    this.props.onResize && this.props.onResize(sizes);
   };
 
   render() {
-    const {children, ...props} = this.props;
+    const {children, onResize, ...props} = this.props;
     const {width, height} = this.state;
 
     return createElement(
