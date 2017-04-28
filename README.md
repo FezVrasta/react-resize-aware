@@ -21,32 +21,29 @@ npm install react-resize-aware --save
 # Usage
 
 > **note**: `ResizeAware` needs a position different from `initial` to work!  
-> Make sure to set it to `relative`, `absolute` or `fixed` trough `style` or CSS
+> Make sure to set it to `relative`, `absolute` or `fixed` using its `style` property or with CSS
 
 ```jsx
-import React, { Component } from 'react'
-import { findDOMNode } from 'react-dom'
-import ResizeAware from 'react-resize-aware'
+import React from 'react';
+import ResizeAware from 'react-resize-aware';
 
-export default class FooBar extends Component {
-  render() {
-    return (
-      <ResizeAware ref='container' style={{position: 'relative'}}>
-        Hello, World!
-      </ResizeAware>
-    )
-  }
-
-  componentDidMount() {
-    findDOMNode(this.refs.container).addEventListener('resize', (evt) => {
-      console.log('Component has been resized!')
-    })
-  }
+// This component will get rerendered everytime its width or height changes
+function MyComponent({width, height}) {
+  return <div>{width}x{height}</div>;
 }
+
+function App() {
+  return (
+    <ResizeAware>
+      <MyComponent />
+    </ResizeAware>
+  );
+}
+
 ```
 
 
 # License
 
 MIT License
-Copyright 2016, Federico Zivolo
+Copyright 2016+, Federico Zivolo
