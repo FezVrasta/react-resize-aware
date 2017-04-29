@@ -10,8 +10,6 @@ You can then listen to such event to perform any kind of operation.
 This component doesn't rely on intervals, loops or any other weird stuff.  
 It takes advantage of the `resize` event of the `<object>` HTML element.
 
-It requires just React.js and ReactDOM.
-
 Install it with:
 
 ```
