@@ -12,6 +12,7 @@ export default {
   },
   plugins: [
     babel({
+      babelrc: false,
       presets: [['es2015', {modules: false}], 'stage-2'],
     }),
   ],

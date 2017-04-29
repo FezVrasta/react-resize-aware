@@ -80,16 +80,7 @@ class MyComponent extend Component {
   }
 }
 ```
-
-## Properties
-
-- The `onlyEvent` property will prevent ResizeAware from passing the `height` and `width`
-properties to its child component, in case you don't want to rely on them.
-- The `tag` property allows to define the HTML tag used by ResizeAware to render.
-- The `onResize` property is an optional callback called on each resize with as first
-  argument an object containing `height` and `width` properties.
-
-<!-- ## Self containing
+## Self containing
 
 If you need to keep your DOM structure clean and you don't want the additional
 `div` added by ResizeAware, you can use the component as base for your own one.
@@ -99,8 +90,16 @@ import React from 'react';
 import ResizeAware from 'react-resize-aware';
 
 // This component will get re-rendered every time its width or height changes
-function MyComponent({width, height}) {
-  return <div style={{ position: 'relative' }}>{width}x{height}</div>;
+// It must expose a `getRef` property and must allow its `children` to be rendered
+// as direct descendant
+// The `getRef` property must be assigned to the `ref` property of the main element
+function MyComponent({width, height, getRef, children}) {
+  return (
+    <div ref={getRef} style={{ position: 'relative' }}>
+      <span>{width}x{height}</span>
+      {children}
+    </div>
+  );
 }
 
 function App() {
@@ -108,7 +107,15 @@ function App() {
     <ResizeAware component={MyComponent} />
   );
 }
-``` -->
+```
+
+## Properties
+
+- The `onlyEvent` property will prevent ResizeAware from passing the `height` and `width`
+properties to its child component, in case you don't want to rely on them.
+- The `component` property allows to define the HTML tag used by ResizeAware to render, or any React component.
+- The `onResize` property is an optional callback called on each resize with as first
+  argument an object containing `height` and `width` properties.
 
 # License
 

@@ -1,9 +1,10 @@
 {
   "name": "react-resize-aware",
-  "version": "2.2.0",
+  "version": "2.3.0",
   "description": "A resize aware component used to detect sizes changes on your components",
   "main": "dist/index.js",
   "scripts": {
+    "test": "jest --coverage",
     "prepare": "NODE_ENV=production rollup -c rollup.config.js && cp dist/index.js docs/react-resize-aware.js"
   },
   "repository": {
@@ -29,9 +30,19 @@
   "homepage": "https://github.com/FezVrasta/react-resize-aware#readme",
   "devDependencies": {
     "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
     "babel-preset-stage-2": "^6.24.1",
+    "enzyme": "^2.8.2",
+    "enzyme-to-json": "^1.5.1",
+    "jest": "^19.0.2",
+    "jest-enzyme": "^3.0.1",
     "react": "^15.5.4",
+    "react-dom": "^15.5.4",
+    "react-test-renderer": "^15.5.4",
     "rollup": "^0.41.6",
     "rollup-plugin-babel": "^2.7.1"
+  },
+  "jest": {
+    "setupTestFrameworkScriptFile": "./node_modules/jest-enzyme/lib/index.js"
   }
 }

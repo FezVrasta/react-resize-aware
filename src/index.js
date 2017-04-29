@@ -8,7 +8,7 @@
 
 import {createElement, Component, cloneElement} from 'react';
 
-const objectStyle = {
+const style = {
   display: 'block',
   position: 'absolute',
   top: 0,
@@ -21,14 +21,8 @@ const objectStyle = {
 };
 
 export default class ResizeAware extends Component {
-  static defaultProps = {
-    tag: 'div',
-  };
-
-  state = {
-    width: undefined,
-    height: undefined,
-  };
+  static defaultProps = {component: 'div'};
+  state = {};
 
   // Init the resizeElement
   componentDidMount() {
@@ -64,25 +58,26 @@ export default class ResizeAware extends Component {
   };
 
   render() {
-    const {children, onResize, onlyEvent, tag, ...props} = this.props;
+    const {children, onResize, onlyEvent, component, ...props} = this.props;
     const {width, height} = this.state;
 
+    const hasCustomComponent = typeof component !== 'string';
+    const passSizeProps = !onlyEvent && hasCustomComponent;
+
     return createElement(
-      tag,
+      component,
       {
-        ref: el => (this.container = el),
+        [hasCustomComponent ? 'getRef' : 'ref']: el => (this.container = el),
+        ...this.state,
         ...props,
       },
       createElement('object', {
         type: 'text/html',
-        style: objectStyle,
+        style,
         ref: el => (this.resizeElement = el),
         onLoad: this.handleObjectLoad,
       }),
-      cloneElement(children, {
-        width: onlyEvent ? undefined : width,
-        height: onlyEvent ? undefined : height,
-      })
+      !!children && cloneElement(children, passSizeProps ? this.state : null)
     );
   }
 }

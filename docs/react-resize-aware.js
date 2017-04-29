@@ -8,6 +8,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -24,7 +26,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 // Copyright 2016, Federico Zivolo
 //
 
-var objectStyle = {
+var style = {
   display: 'block',
   position: 'absolute',
   top: 0,
@@ -50,10 +52,7 @@ var ResizeAware = function (_Component) {
       args[_key] = arguments[_key];
     }
 
-    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = ResizeAware.__proto__ || Object.getPrototypeOf(ResizeAware)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
-      width: undefined,
-      height: undefined
-    }, _this.handleObjectLoad = function (evt) {
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = ResizeAware.__proto__ || Object.getPrototypeOf(ResizeAware)).call.apply(_ref, [this].concat(args))), _this), _this.state = {}, _this.handleObjectLoad = function (evt) {
       _this.setState({
         resizeTarget: evt.target.contentDocument.defaultView
       }, function () {
@@ -98,38 +97,34 @@ var ResizeAware = function (_Component) {
           children = _props.children,
           onResize = _props.onResize,
           onlyEvent = _props.onlyEvent,
-          tag = _props.tag,
-          props = _objectWithoutProperties(_props, ['children', 'onResize', 'onlyEvent', 'tag']);
+          component = _props.component,
+          props = _objectWithoutProperties(_props, ['children', 'onResize', 'onlyEvent', 'component']);
 
       var _state = this.state,
           width = _state.width,
           height = _state.height;
 
 
-      return react.createElement(tag, _extends({
-        ref: function ref(el) {
-          return _this2.container = el;
-        }
-      }, props), react.createElement('object', {
+      var hasCustomComponent = typeof component !== 'string';
+      var passSizeProps = !onlyEvent && hasCustomComponent;
+
+      return react.createElement(component, _extends(_defineProperty({}, hasCustomComponent ? 'getRef' : 'ref', function (el) {
+        return _this2.container = el;
+      }), this.state, props), react.createElement('object', {
         type: 'text/html',
-        style: objectStyle,
+        style: style,
         ref: function ref(el) {
           return _this2.resizeElement = el;
         },
         onLoad: this.handleObjectLoad
-      }), react.cloneElement(children, {
-        width: onlyEvent ? undefined : width,
-        height: onlyEvent ? undefined : height
-      }));
+      }), !!children && react.cloneElement(children, passSizeProps ? this.state : null));
     }
   }]);
 
   return ResizeAware;
 }(react.Component);
 
-ResizeAware.defaultProps = {
-  tag: 'div'
-};
+ResizeAware.defaultProps = { component: 'div' };
 
 return ResizeAware;
 
