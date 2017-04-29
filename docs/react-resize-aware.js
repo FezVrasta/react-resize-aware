@@ -97,33 +97,39 @@ var ResizeAware = function (_Component) {
       var _props = this.props,
           children = _props.children,
           onResize = _props.onResize,
-          props = _objectWithoutProperties(_props, ['children', 'onResize']);
+          onlyEvent = _props.onlyEvent,
+          tag = _props.tag,
+          props = _objectWithoutProperties(_props, ['children', 'onResize', 'onlyEvent', 'tag']);
 
       var _state = this.state,
           width = _state.width,
           height = _state.height;
 
 
-      return react.createElement('div', _extends({
+      return react.createElement(tag, _extends({
         ref: function ref(el) {
           return _this2.container = el;
         }
-      }, props), react.cloneElement(children, {
-        width: width,
-        height: height
-      }), react.createElement('object', {
+      }, props), react.createElement('object', {
         type: 'text/html',
         style: objectStyle,
         ref: function ref(el) {
           return _this2.resizeElement = el;
         },
         onLoad: this.handleObjectLoad
+      }), react.cloneElement(children, {
+        width: onlyEvent ? undefined : width,
+        height: onlyEvent ? undefined : height
       }));
     }
   }]);
 
   return ResizeAware;
 }(react.Component);
+
+ResizeAware.defaultProps = {
+  tag: 'div'
+};
 
 return ResizeAware;
 

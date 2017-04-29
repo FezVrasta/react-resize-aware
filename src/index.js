@@ -21,6 +21,10 @@ const objectStyle = {
 };
 
 export default class ResizeAware extends Component {
+  static defaultProps = {
+    tag: 'div',
+  };
+
   state = {
     width: undefined,
     height: undefined,
@@ -60,24 +64,24 @@ export default class ResizeAware extends Component {
   };
 
   render() {
-    const {children, onResize, ...props} = this.props;
+    const {children, onResize, onlyEvent, tag, ...props} = this.props;
     const {width, height} = this.state;
 
     return createElement(
-      'div',
+      tag,
       {
         ref: el => (this.container = el),
         ...props,
       },
-      cloneElement(children, {
-        width,
-        height,
-      }),
       createElement('object', {
         type: 'text/html',
         style: objectStyle,
         ref: el => (this.resizeElement = el),
         onLoad: this.handleObjectLoad,
+      }),
+      cloneElement(children, {
+        width: onlyEvent ? undefined : width,
+        height: onlyEvent ? undefined : height,
       })
     );
   }
