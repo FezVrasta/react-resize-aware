@@ -80,6 +80,7 @@ class MyComponent extend Component {
   }
 }
 ```
+
 ## Self containing
 
 If you need to keep your DOM structure clean and you don't want the additional
@@ -108,6 +109,43 @@ function App() {
   );
 }
 ```
+
+## Decorator/enhancer
+
+In case you prefer to directly decorate your component to add to it the ResizeAware
+functionalities, you can do as follow:
+
+```
+import React from 'react';
+import { makeResizeAware } from 'react-resize-aware';
+
+export default makeResizeAware(function MyComponent({width, height, getRef, children})) {
+  return (
+    <div ref={getRef} style={{ position: 'relative' }}>
+      <span>{width}x{height}</span>
+      {children}
+    </div>
+  );
+})
+```
+
+Or, with ES7 decorators:
+
+```
+import React from 'react';
+import { makeResizeAware } from 'react-resize-aware';
+
+@makeResizeAware
+export default function MyComponent({width, height, getRef, children})) {
+  return (
+    <div ref={getRef} style={{ position: 'relative' }}>
+      <span>{width}x{height}</span>
+      {children}
+    </div>
+  );
+}
+```
+
 
 ## Properties
 

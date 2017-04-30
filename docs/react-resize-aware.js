@@ -1,8 +1,8 @@
 (function (global, factory) {
-	typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('react')) :
-	typeof define === 'function' && define.amd ? define(['react'], factory) :
-	(global.ReactResizeAware = factory(global.React));
-}(this, (function (react) { 'use strict';
+	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('react')) :
+	typeof define === 'function' && define.amd ? define(['exports', 'react'], factory) :
+	(factory((global.ReactResizeAware = global.ReactResizeAware || {}),global.React));
+}(this, (function (exports,react) { 'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
@@ -91,7 +91,8 @@ var ResizeAware = function (_Component) {
   }, {
     key: 'render',
     value: function render() {
-      var _this2 = this;
+      var _this2 = this,
+          _extends2;
 
       var _props = this.props,
           children = _props.children,
@@ -108,9 +109,9 @@ var ResizeAware = function (_Component) {
       var hasCustomComponent = typeof component !== 'string';
       var passSizeProps = !onlyEvent && hasCustomComponent;
 
-      return react.createElement(component, _extends(_defineProperty({}, hasCustomComponent ? 'getRef' : 'ref', function (el) {
+      return react.createElement(component, _extends((_extends2 = {}, _defineProperty(_extends2, hasCustomComponent ? 'getRef' : 'ref', function (el) {
         return _this2.container = el;
-      }), this.state, props), react.createElement('object', {
+      }), _defineProperty(_extends2, 'width', width), _defineProperty(_extends2, 'height', height), _extends2), props), react.createElement('object', {
         type: 'text/html',
         style: style,
         ref: function ref(el) {
@@ -125,8 +126,16 @@ var ResizeAware = function (_Component) {
 }(react.Component);
 
 ResizeAware.defaultProps = { component: 'div' };
+function makeResizeAware(component) {
+  return function (props) {
+    return React.createElement(ReactResizeAware, _extends({ component: component }, props));
+  };
+}
 
-return ResizeAware;
+exports['default'] = ResizeAware;
+exports.makeResizeAware = makeResizeAware;
+
+Object.defineProperty(exports, '__esModule', { value: true });
 
 })));
 //# sourceMappingURL=index.js.map

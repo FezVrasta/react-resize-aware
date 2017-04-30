@@ -49,7 +49,7 @@ function MyComponent(_ref) {
 }
 
 function App() {
-  return React.createElement(ReactResizeAware, {
+  return React.createElement(ReactResizeAware.default, {
     component: MyComponent,
     useBoundingClientRect: true,
     style: {position: 'relative'},

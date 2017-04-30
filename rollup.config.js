@@ -6,6 +6,7 @@ export default {
   moduleName: 'ReactResizeAware',
   format: 'umd',
   sourceMap: true,
+  exports: 'named',
   external: ['react'],
   globals: {
     react: 'React',

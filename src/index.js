@@ -68,7 +68,8 @@ export default class ResizeAware extends Component {
       component,
       {
         [hasCustomComponent ? 'getRef' : 'ref']: el => (this.container = el),
-        ...this.state,
+        width,
+        height,
         ...props,
       },
       createElement('object', {
@@ -80,4 +81,8 @@ export default class ResizeAware extends Component {
       !!children && cloneElement(children, passSizeProps ? this.state : null)
     );
   }
+}
+
+export function makeResizeAware(component) {
+  return props => React.createElement(ReactResizeAware, {component, ...props});
 }
