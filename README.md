@@ -2,18 +2,25 @@
 
 A simple React.js component you can use to make any piece of UI aware of its size.
 
-Each time the component changes its size (it can be due to a window resize, a CSS change, a JS action, etc...)
-a `resize` event will be fired on the component itself.
+Each time the component' size changes, your component will be notified by one of
+the methods described below.
+The size change can be detected by a window resize, a CSS media query,
+a CSS pseudo selector, a JavaScript action or really, anything.
 
-You can then listen to such event to perform any kind of operation.
+**This component doesn't rely on intervals, loops, DOM manipulation detection
+or any other weird stuff.  
+It takes advantage of the `resize` event of the `<object>` HTML element.**
 
-This component doesn't rely on intervals, loops or any other weird stuff.  
-It takes advantage of the `resize` event of the `<object>` HTML element.
+You don't have to care about anything, it will always work as you expect in any
+possible scenario.  
+Also, it's just 2.6KB (or 1.2KB gzipped)! (no dependencies!)
 
 Install it with:
 
 ```
-npm install react-resize-aware --save
+yarn add react-resize-aware
+# or
+npm install --save react-resize-aware
 ```
 
 # Usage
