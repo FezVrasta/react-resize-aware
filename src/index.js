@@ -85,5 +85,5 @@ export default class ResizeAware extends Component {
 }
 
 export function makeResizeAware(component) {
-  return props => React.createElement(ReactResizeAware, {component, ...props});
+  return props => createElement(ResizeAware, {component, ...props});
 }

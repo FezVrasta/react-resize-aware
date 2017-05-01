@@ -118,7 +118,7 @@ var ResizeAware = function (_Component) {
         },
         onLoad: this.handleObjectLoad
       }), react.Children.map(children, function (child) {
-        return react.cloneElement(child, !onlyEvent ? _this2.state : null);
+        return react.cloneElement(child, !onlyEvent ? { width: width, height: height } : null);
       }));
     }
   }]);
@@ -129,7 +129,7 @@ var ResizeAware = function (_Component) {
 ResizeAware.defaultProps = { component: 'div' };
 function makeResizeAware(component) {
   return function (props) {
-    return React.createElement(ReactResizeAware, _extends({ component: component }, props));
+    return react.createElement(ResizeAware, _extends({ component: component }, props));
   };
 }
 
