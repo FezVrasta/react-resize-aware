@@ -6,7 +6,7 @@
 // Copyright 2016, Federico Zivolo
 //
 
-import {createElement, Component, cloneElement} from 'react';
+import {createElement, Component, Children, cloneElement} from 'react';
 
 const style = {
   display: 'block',
@@ -62,14 +62,13 @@ export default class ResizeAware extends Component {
     const {width, height} = this.state;
 
     const hasCustomComponent = typeof component !== 'string';
-    const passSizeProps = !onlyEvent && hasCustomComponent;
 
     return createElement(
       component,
       {
         [hasCustomComponent ? 'getRef' : 'ref']: el => (this.container = el),
-        width,
-        height,
+        width: hasCustomComponent ? width : undefined,
+        height: hasCustomComponent ? height : undefined,
         ...props,
       },
       createElement('object', {
@@ -78,7 +77,9 @@ export default class ResizeAware extends Component {
         ref: el => (this.resizeElement = el),
         onLoad: this.handleObjectLoad,
       }),
-      !!children && cloneElement(children, passSizeProps ? this.state : null)
+      Children.map(children, child =>
+        cloneElement(child, !onlyEvent ? this.state : null)
+      )
     );
   }
 }

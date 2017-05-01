@@ -107,18 +107,19 @@ var ResizeAware = function (_Component) {
 
 
       var hasCustomComponent = typeof component !== 'string';
-      var passSizeProps = !onlyEvent && hasCustomComponent;
 
       return react.createElement(component, _extends((_extends2 = {}, _defineProperty(_extends2, hasCustomComponent ? 'getRef' : 'ref', function (el) {
         return _this2.container = el;
-      }), _defineProperty(_extends2, 'width', width), _defineProperty(_extends2, 'height', height), _extends2), props), react.createElement('object', {
+      }), _defineProperty(_extends2, 'width', hasCustomComponent ? width : undefined), _defineProperty(_extends2, 'height', hasCustomComponent ? height : undefined), _extends2), props), react.createElement('object', {
         type: 'text/html',
         style: style,
         ref: function ref(el) {
           return _this2.resizeElement = el;
         },
         onLoad: this.handleObjectLoad
-      }), !!children && react.cloneElement(children, passSizeProps ? this.state : null));
+      }), react.Children.map(children, function (child) {
+        return react.cloneElement(child, !onlyEvent ? _this2.state : null);
+      }));
     }
   }]);
 

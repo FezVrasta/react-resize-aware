@@ -67,6 +67,48 @@ exports[`allows to define an \`onResize\` property 1`] = `
 </ResizeAware>
 `;
 
+exports[`allows to use its child as target 1`] = `
+<ResizeAware
+  component="div"
+  style={
+    Object {
+      "position": "relative",
+    }
+  }
+>
+  <div
+    style={
+      Object {
+        "position": "relative",
+      }
+    }
+  >
+    <object
+      onLoad={[Function]}
+      style={
+        Object {
+          "display": "block",
+          "height": "100%",
+          "left": 0,
+          "overflow": "hidden",
+          "pointerEvents": "none",
+          "position": "absolute",
+          "top": 0,
+          "width": "100%",
+          "zIndex": -1,
+        }
+      }
+      type="text/html"
+    />
+    <DummyComponent>
+      <div>
+        x
+      </div>
+    </DummyComponent>
+  </div>
+</ResizeAware>
+`;
+
 exports[`allows to use its children as target 1`] = `
 <ResizeAware
   component="div"

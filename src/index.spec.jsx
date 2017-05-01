@@ -11,11 +11,24 @@ function DummyComponent2({getRef, ...props}) {
   return <div ref={getRef} {...props} />;
 }
 
-it('allows to use its children as target', () => {
+it('allows to use its child as target', () => {
   const wrapper = mount(
     <ResizeAware style={{position: 'relative'}}>
       <DummyComponent />
     </ResizeAware>
+  );
+
+  expect(toJson(wrapper)).toMatchSnapshot();
+});
+
+it('allows to use itself between a component markup', () => {
+  const wrapper = mount(
+    <div>
+      <ResizeAware style={{position: 'relative'}}>
+        <div />
+        <div />
+      </ResizeAware>
+    </div>
   );
 
   expect(toJson(wrapper)).toMatchSnapshot();
