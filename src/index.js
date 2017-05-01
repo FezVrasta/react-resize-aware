@@ -78,7 +78,7 @@ export default class ResizeAware extends Component {
         onLoad: this.handleObjectLoad,
       }),
       Children.map(children, child =>
-        cloneElement(child, !onlyEvent ? this.state : null)
+        cloneElement(child, !onlyEvent ? {width, height} : null)
       )
     );
   }
