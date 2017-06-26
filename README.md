@@ -122,7 +122,7 @@ function App() {
 In case you prefer to directly decorate your component to add to it the ResizeAware
 functionalities, you can do as follow:
 
-```
+```jsx
 import React from 'react';
 import { makeResizeAware } from 'react-resize-aware';
 
@@ -138,7 +138,7 @@ export default makeResizeAware(function MyComponent({width, height, getRef, chil
 
 Or, with ES7 decorators:
 
-```
+```jsx
 import React from 'react';
 import { makeResizeAware } from 'react-resize-aware';
 
