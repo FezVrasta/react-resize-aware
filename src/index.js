@@ -76,6 +76,8 @@ export default class ResizeAware extends Component {
         style,
         ref: el => (this.resizeElement = el),
         onLoad: this.handleObjectLoad,
+        'aria-hidden': true,
+        tabIndex: -1,
       }),
       Children.map(children, child =>
         cloneElement(child, !onlyEvent ? {width, height} : null)
