@@ -51,7 +51,7 @@ it('allows to define a custom component', () => {
   expect(toJson(wrapper)).toMatchSnapshot();
 });
 
-it.only('applies aria attributes to <object> to avoid screenreader issues', () => {
+it('applies aria attributes to <object> to avoid screenreader issues', () => {
   const object = mount(
     <ResizeAware />
   ).find('object');
