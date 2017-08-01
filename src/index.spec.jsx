@@ -50,3 +50,12 @@ it('allows to define a custom component', () => {
 
   expect(toJson(wrapper)).toMatchSnapshot();
 });
+
+it.only('applies aria attributes to <object> to avoid screenreader issues', () => {
+  const object = mount(
+    <ResizeAware />
+  ).find('object');
+
+  expect(object.prop('aria-hidden')).toBe(true);
+  expect(object.prop('tabIndex')).toBe(-1);
+});
