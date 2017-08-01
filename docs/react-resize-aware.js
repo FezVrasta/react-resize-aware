@@ -116,7 +116,9 @@ var ResizeAware = function (_Component) {
         ref: function ref(el) {
           return _this2.resizeElement = el;
         },
-        onLoad: this.handleObjectLoad
+        onLoad: this.handleObjectLoad,
+        'aria-hidden': true,
+        tabIndex: -1
       }), react.Children.map(children, function (child) {
         return react.cloneElement(child, !onlyEvent ? { width: width, height: height } : null);
       }));
