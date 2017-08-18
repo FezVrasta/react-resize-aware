@@ -143,13 +143,16 @@ import React from 'react';
 import { makeResizeAware } from 'react-resize-aware';
 
 @makeResizeAware
-export default function MyComponent({width, height, getRef, children})) {
-  return (
-    <div ref={getRef} style={{ position: 'relative' }}>
-      <span>{width}x{height}</span>
-      {children}
-    </div>
-  );
+export default class MyComponent extends React.Component {
+  render() {
+    const {width, height, getRef, children} = this.props;
+    return (
+      <div ref={getRef} style={{ position: 'relative' }}>
+        <span>{width}x{height}</span>
+        {children}
+      </div>
+    );
+  }
 }
 ```
 
