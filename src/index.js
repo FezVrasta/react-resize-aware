@@ -6,7 +6,7 @@
 // Copyright 2016, Federico Zivolo
 //
 
-import {createElement, Component, Children, cloneElement} from 'react';
+import React, {Component, Children, cloneElement} from 'react';
 
 const style = {
   display: 'block',
@@ -57,35 +57,47 @@ export default class ResizeAware extends Component {
     this.props.onResize && this.props.onResize(sizes);
   };
 
+  handleRef = el => {
+    this.container = el;
+  }
+  handleResizeRef = el => {
+    this.resizeElement = el;
+  };
   render() {
-    const {children, onResize, onlyEvent, component, ...props} = this.props;
+    const {
+      children,
+      onResize,
+      onlyEvent,
+      component: Component,
+      ...props
+    } = this.props;
     const {width, height} = this.state;
 
-    const hasCustomComponent = typeof component !== 'string';
-
-    return createElement(
-      component,
-      {
-        [hasCustomComponent ? 'getRef' : 'ref']: el => (this.container = el),
-        width: hasCustomComponent ? width : undefined,
-        height: hasCustomComponent ? height : undefined,
-        ...props,
-      },
-      createElement('object', {
-        type: 'text/html',
-        style,
-        ref: el => (this.resizeElement = el),
-        onLoad: this.handleObjectLoad,
-        'aria-hidden': true,
-        tabIndex: -1,
-      }),
-      Children.map(children, child =>
-        cloneElement(child, !onlyEvent ? {width, height} : null)
-      )
+    if (typeof Component === 'string') {
+      props.ref = this.handleRef;
+    } else {
+      props.getRef = this.handleRef;
+      props.width = width;
+      props.height = height;
+    }
+    return (
+      <Component {...props}>
+        <object
+          ref={this.handleResizeRef}
+          type="text/html"
+          style={style}
+          onLoad={this.handleObjectLoad}
+          aria-hidden
+          tabIndex={-1}
+        />
+        {Children.map(children, child =>
+          cloneElement(child, !onlyEvent ? {width, height} : null)
+        )}
+      </Component>
     );
   }
 }
 
 export function makeResizeAware(component) {
-  return props => createElement(ResizeAware, {component, ...props});
+  return props => <ResizeAware {...props} component={component} />;
 }
