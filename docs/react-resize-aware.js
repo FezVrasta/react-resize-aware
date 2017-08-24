@@ -91,8 +91,8 @@ var ResizeAware = function (_Component) {
   }, {
     key: 'render',
     value: function render() {
-      var _this2 = this,
-          _extends2;
+      var _sizes,
+          _this2 = this;
 
       var _props = this.props,
           children = _props.children,
@@ -113,9 +113,11 @@ var ResizeAware = function (_Component) {
       var widthProp = [widthPropName || 'width'];
       var heightProp = [heightPropName || 'height'];
 
-      return react.createElement(component, _extends((_extends2 = {}, _defineProperty(_extends2, hasCustomComponent ? 'getRef' : 'ref', function (el) {
+      var sizes = (_sizes = {}, _defineProperty(_sizes, widthProp, width), _defineProperty(_sizes, heightProp, height), _sizes);
+
+      return react.createElement(component, _extends(_defineProperty({}, hasCustomComponent ? 'getRef' : 'ref', function (el) {
         return _this2.container = el;
-      }), _defineProperty(_extends2, widthProp, hasCustomComponent ? width : undefined), _defineProperty(_extends2, heightProp, hasCustomComponent ? height : undefined), _extends2), props), react.createElement('object', {
+      }), hasCustomComponent && sizes, props), react.createElement('object', {
         type: 'text/html',
         style: style,
         ref: function ref(el) {
@@ -124,10 +126,8 @@ var ResizeAware = function (_Component) {
         onLoad: this.handleObjectLoad,
         'aria-hidden': true,
         tabIndex: -1
-      }), react.Children.map(children, function (child) {
-        var _ref2;
-
-        return react.cloneElement(child, !onlyEvent ? (_ref2 = {}, _defineProperty(_ref2, widthProp, width), _defineProperty(_ref2, heightProp, height), _ref2) : null);
+      }), typeof children === 'function' ? children({ width: width, height: height }) : react.Children.map(children, function (child) {
+        return react.isValidElement(child) ? react.cloneElement(child, !onlyEvent ? sizes : null) : child;
       }));
     }
   }]);

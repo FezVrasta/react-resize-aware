@@ -111,12 +111,50 @@ exports[`allows to define custom width and height names 1`] = `
     <Test
       customHeight={10}
       customWidth={10}
-    >
-      <div
-        customHeight={10}
-        customWidth={10}
-      />
-    </Test>
+    />
+  </div>
+</ResizeAware>
+`;
+
+exports[`allows to use a function as child 1`] = `
+<ResizeAware
+  component="div"
+  style={
+    Object {
+      "position": "relative",
+    }
+  }
+>
+  <div
+    style={
+      Object {
+        "position": "relative",
+      }
+    }
+  >
+    <object
+      aria-hidden={true}
+      onLoad={[Function]}
+      style={
+        Object {
+          "display": "block",
+          "height": "100%",
+          "left": 0,
+          "overflow": "hidden",
+          "pointerEvents": "none",
+          "position": "absolute",
+          "top": 0,
+          "width": "100%",
+          "zIndex": -1,
+        }
+      }
+      tabIndex={-1}
+      type="text/html"
+    />
+    <div
+      height={10}
+      width={10}
+    />
   </div>
 </ResizeAware>
 `;

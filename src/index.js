@@ -6,7 +6,13 @@
 // Copyright 2016, Federico Zivolo
 //
 
-import { createElement, Component, Children, cloneElement } from 'react';
+import {
+  createElement,
+  Component,
+  Children,
+  cloneElement,
+  isValidElement,
+} from 'react';
 
 const style = {
   display: 'block',
@@ -81,12 +87,16 @@ export default class ResizeAware extends Component {
     const widthProp = [widthPropName || 'width'];
     const heightProp = [heightPropName || 'height'];
 
+    const sizes = {
+      [widthProp]: width,
+      [heightProp]: height,
+    };
+
     return createElement(
       component,
       {
         [hasCustomComponent ? 'getRef' : 'ref']: el => (this.container = el),
-        [widthProp]: hasCustomComponent ? width : undefined,
-        [heightProp]: hasCustomComponent ? height : undefined,
+        ...(hasCustomComponent && sizes),
         ...props,
       },
       createElement('object', {
@@ -97,12 +107,15 @@ export default class ResizeAware extends Component {
         'aria-hidden': true,
         tabIndex: -1,
       }),
-      Children.map(children, child =>
-        cloneElement(
-          child,
-          !onlyEvent ? { [widthProp]: width, [heightProp]: height } : null
-        )
-      )
+      typeof children === 'function'
+        ? children({ width, height })
+        : Children.map(
+            children,
+            child =>
+              isValidElement(child)
+                ? cloneElement(child, !onlyEvent ? sizes : null)
+                : child
+          )
     );
   }
 }

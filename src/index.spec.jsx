@@ -63,7 +63,7 @@ it('applies aria attributes to <object> to avoid screenreader issues', () => {
 });
 
 it('allows to define custom width and height names', () => {
-  const Test = props => <div {...props} />;
+  const Test = props => null;
   const wrapper = mount(
     <ResizeAware
       style={{ position: 'relative' }}
@@ -71,6 +71,18 @@ it('allows to define custom width and height names', () => {
       heightPropName="customHeight"
     >
       <Test />
+    </ResizeAware>
+  );
+
+  wrapper.setState({ width: 10, height: 10 });
+
+  expect(toJson(wrapper)).toMatchSnapshot();
+});
+
+it('allows to use a function as child', () => {
+  const wrapper = mount(
+    <ResizeAware style={{ position: 'relative' }}>
+      {({ width, height }) => <div width={width} height={height} />}
     </ResizeAware>
   );
 

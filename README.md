@@ -117,6 +117,25 @@ function App() {
 }
 ```
 
+## Child function
+
+Whenever you want to manipulate the `width` and `height` properties before they
+get passed down to the child component, you can define a function as child of ResizeAware:
+
+```jsx
+import React from 'react';
+import ResizeAware from 'react-resize-aware';
+
+export default makeResizeAware(function MyComponent({width, height, getRef, children})) {
+  return (
+    <ResizeAware style={{ position: 'relative' }}>
+      {({ width, height }) =>
+        <div style={{ width: width / 2, height: height / 2 }} />}
+    </ResizeAware>
+  );
+})
+```
+
 ## Decorator/enhancer
 
 In case you prefer to directly decorate your component to add to it the ResizeAware
