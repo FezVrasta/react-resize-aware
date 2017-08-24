@@ -164,6 +164,8 @@ properties to its child component, in case you don't want to rely on them.
 - The `component` property allows to define the HTML tag used by ResizeAware to render, or any React component.
 - The `onResize` property is an optional callback called on each resize with as first
   argument an object containing `height` and `width` properties.
+- `widthPropName` and `heightPropName`, set them to change the name of the properties passed to the
+  child component, in place of the default `width` and `height` names.
 
 # License
 
