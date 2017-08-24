@@ -71,6 +71,56 @@ exports[`allows to define an \`onResize\` property 1`] = `
 </ResizeAware>
 `;
 
+exports[`allows to define custom width and height names 1`] = `
+<ResizeAware
+  component="div"
+  heightPropName="customHeight"
+  style={
+    Object {
+      "position": "relative",
+    }
+  }
+  widthPropName="customWidth"
+>
+  <div
+    style={
+      Object {
+        "position": "relative",
+      }
+    }
+  >
+    <object
+      aria-hidden={true}
+      onLoad={[Function]}
+      style={
+        Object {
+          "display": "block",
+          "height": "100%",
+          "left": 0,
+          "overflow": "hidden",
+          "pointerEvents": "none",
+          "position": "absolute",
+          "top": 0,
+          "width": "100%",
+          "zIndex": -1,
+        }
+      }
+      tabIndex={-1}
+      type="text/html"
+    />
+    <Test
+      customHeight={10}
+      customWidth={10}
+    >
+      <div
+        customHeight={10}
+        customWidth={10}
+      />
+    </Test>
+  </div>
+</ResizeAware>
+`;
+
 exports[`allows to use its child as target 1`] = `
 <ResizeAware
   component="div"

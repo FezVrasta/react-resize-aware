@@ -1,6 +1,6 @@
 {
   "name": "react-resize-aware",
-  "version": "2.5.0",
+  "version": "2.6.0",
   "description": "A resize aware component used to detect sizes changes on your components",
   "main": "dist/index.js",
   "scripts": {

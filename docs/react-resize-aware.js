@@ -99,7 +99,9 @@ var ResizeAware = function (_Component) {
           onResize = _props.onResize,
           onlyEvent = _props.onlyEvent,
           component = _props.component,
-          props = _objectWithoutProperties(_props, ['children', 'onResize', 'onlyEvent', 'component']);
+          widthPropName = _props.widthPropName,
+          heightPropName = _props.heightPropName,
+          props = _objectWithoutProperties(_props, ['children', 'onResize', 'onlyEvent', 'component', 'widthPropName', 'heightPropName']);
 
       var _state = this.state,
           width = _state.width,
@@ -108,9 +110,12 @@ var ResizeAware = function (_Component) {
 
       var hasCustomComponent = typeof component !== 'string';
 
+      var widthProp = [widthPropName || 'width'];
+      var heightProp = [heightPropName || 'height'];
+
       return react.createElement(component, _extends((_extends2 = {}, _defineProperty(_extends2, hasCustomComponent ? 'getRef' : 'ref', function (el) {
         return _this2.container = el;
-      }), _defineProperty(_extends2, 'width', hasCustomComponent ? width : undefined), _defineProperty(_extends2, 'height', hasCustomComponent ? height : undefined), _extends2), props), react.createElement('object', {
+      }), _defineProperty(_extends2, widthProp, hasCustomComponent ? width : undefined), _defineProperty(_extends2, heightProp, hasCustomComponent ? height : undefined), _extends2), props), react.createElement('object', {
         type: 'text/html',
         style: style,
         ref: function ref(el) {
@@ -120,7 +125,9 @@ var ResizeAware = function (_Component) {
         'aria-hidden': true,
         tabIndex: -1
       }), react.Children.map(children, function (child) {
-        return react.cloneElement(child, !onlyEvent ? { width: width, height: height } : null);
+        var _ref2;
+
+        return react.cloneElement(child, !onlyEvent ? (_ref2 = {}, _defineProperty(_ref2, widthProp, width), _defineProperty(_ref2, heightProp, height), _ref2) : null);
       }));
     }
   }]);
@@ -128,7 +135,14 @@ var ResizeAware = function (_Component) {
   return ResizeAware;
 }(react.Component);
 
-ResizeAware.defaultProps = { component: 'div' };
+ResizeAware.defaultProps = {
+  component: 'div',
+  // don't define here the defaults to avoid to break
+  // the render result of previous versions
+  // TODO: use defaultProps to define default values
+  widthPropName: undefined,
+  heightPropName: undefined
+};
 function makeResizeAware(component) {
   return function (props) {
     return react.createElement(ResizeAware, _extends({ component: component }, props));

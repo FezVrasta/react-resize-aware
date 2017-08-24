@@ -6,7 +6,7 @@
 // Copyright 2016, Federico Zivolo
 //
 
-import {createElement, Component, Children, cloneElement} from 'react';
+import { createElement, Component, Children, cloneElement } from 'react';
 
 const style = {
   display: 'block',
@@ -21,7 +21,14 @@ const style = {
 };
 
 export default class ResizeAware extends Component {
-  static defaultProps = {component: 'div'};
+  static defaultProps = {
+    component: 'div',
+    // don't define here the defaults to avoid to break
+    // the render result of previous versions
+    // TODO: use defaultProps to define default values
+    widthPropName: undefined,
+    heightPropName: undefined,
+  };
   state = {};
 
   // Init the resizeElement
@@ -58,17 +65,28 @@ export default class ResizeAware extends Component {
   };
 
   render() {
-    const {children, onResize, onlyEvent, component, ...props} = this.props;
-    const {width, height} = this.state;
+    const {
+      children,
+      onResize,
+      onlyEvent,
+      component,
+      widthPropName,
+      heightPropName,
+      ...props
+    } = this.props;
+    const { width, height } = this.state;
 
     const hasCustomComponent = typeof component !== 'string';
+
+    const widthProp = [widthPropName || 'width'];
+    const heightProp = [heightPropName || 'height'];
 
     return createElement(
       component,
       {
         [hasCustomComponent ? 'getRef' : 'ref']: el => (this.container = el),
-        width: hasCustomComponent ? width : undefined,
-        height: hasCustomComponent ? height : undefined,
+        [widthProp]: hasCustomComponent ? width : undefined,
+        [heightProp]: hasCustomComponent ? height : undefined,
         ...props,
       },
       createElement('object', {
@@ -80,12 +98,15 @@ export default class ResizeAware extends Component {
         tabIndex: -1,
       }),
       Children.map(children, child =>
-        cloneElement(child, !onlyEvent ? {width, height} : null)
+        cloneElement(
+          child,
+          !onlyEvent ? { [widthProp]: width, [heightProp]: height } : null
+        )
       )
     );
   }
 }
 
 export function makeResizeAware(component) {
-  return props => createElement(ResizeAware, {component, ...props});
+  return props => createElement(ResizeAware, { component, ...props });
 }
