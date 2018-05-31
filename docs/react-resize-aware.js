@@ -28,6 +28,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 var style = {
   display: 'block',
+  visibility: 'hidden',
   position: 'absolute',
   top: 0,
   left: 0,
@@ -83,7 +84,15 @@ var ResizeAware = function (_Component) {
   }, {
     key: 'componentWillUnmount',
     value: function componentWillUnmount() {
-      this.state.resizeTarget && this.state.resizeTarget.removeEventListener('resize', this.handleResize);
+      var resizeTarget = this.state.resizeTarget;
+
+      // ensure the resizeTarget exists and is in fact an event listener
+      // this fixes an issue where contentDocument.defaultView is not a real window object
+      // as can be the case when used with react portals
+
+      var isListener = resizeTarget && typeof resizeTarget.removeEventListener === 'function';
+
+      isListener && resizeTarget.removeEventListener('resize', this.handleResize);
     }
 
     // Function called on component resize
