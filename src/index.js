@@ -57,8 +57,15 @@ export default class ResizeAware extends Component {
   };
 
   componentWillUnmount() {
-    this.state.resizeTarget &&
-      this.state.resizeTarget.removeEventListener('resize', this.handleResize);
+    const { resizeTarget } = this.state;
+
+    // ensure the resizeTarget exists and is in fact an event listener
+    // this fixes an issue where contentDocument.defaultView is not a real window object
+    // as can be the case when used with react portals
+    const isListener = resizeTarget && typeof(resizeTarget.removeEventListener) === 'function';
+
+    isListener &&
+      resizeTarget.removeEventListener('resize', this.handleResize);
   }
 
   // Function called on component resize
