@@ -28,7 +28,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 var style = {
   display: 'block',
-  visibility: 'hidden',
+  opacity: 0,
   position: 'absolute',
   top: 0,
   left: 0,
