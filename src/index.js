@@ -16,7 +16,7 @@ import {
 
 const style = {
   display: 'block',
-  visibility: 'hidden',
+  opacity: 0,
   position: 'absolute',
   top: 0,
   left: 0,
