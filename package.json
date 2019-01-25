@@ -1,11 +1,12 @@
 {
   "name": "react-resize-aware",
-  "version": "2.7.2",
-  "description": "A resize aware component used to detect sizes changes on your components",
-  "main": "dist/index.js",
-  "scripts": {
-    "test": "jest --coverage",
-    "prepare": "NODE_ENV=production rollup -c rollup.config.js && cp dist/index.js docs/react-resize-aware.js"
+  "version": "3.0.0",
+  "description": "A React hook that makes it possible to listen to element resize events.",
+  "homepage": "https://github.com/FezVrasta/react-resize-aware#readme",
+  "author": "Federico Zivolo <federico.zivolo@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/FezVrasta/react-resize-aware/issues"
   },
   "repository": {
     "type": "git",
@@ -22,27 +23,20 @@
     "query",
     "react-component"
   ],
-  "author": "Federico Zivolo <federico.zivolo@gmail.com>",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/FezVrasta/react-resize-aware/issues"
+  "main": "dist/index.js",
+  "umd:main": "dist/foo.umd.js",
+  "module": "dist/foo.mjs",
+  "source": "src/index.js",
+  "scripts": {
+    "start": "microbundle watch",
+    "prepare": "microbundle --name useResizeAware --globals react=React --jsx React.createElement && cp -f dist/index.umd.js docs/react-resize-aware.js"
   },
-  "homepage": "https://github.com/FezVrasta/react-resize-aware#readme",
   "devDependencies": {
-    "babel-preset-es2015": "^6.24.1",
-    "babel-preset-react": "^6.24.1",
-    "babel-preset-stage-2": "^6.24.1",
-    "enzyme": "^2.8.2",
-    "enzyme-to-json": "^1.5.1",
-    "jest": "^19.0.2",
-    "jest-enzyme": "^3.0.1",
-    "react": "^15.5.4",
-    "react-dom": "^15.5.4",
-    "react-test-renderer": "^15.5.4",
-    "rollup": "^0.41.6",
-    "rollup-plugin-babel": "^2.7.1"
+    "flow-bin": "^0.91.0",
+    "microbundle": "^0.9.0",
+    "react": "16.8.0-alpha.1"
   },
-  "jest": {
-    "setupTestFrameworkScriptFile": "./node_modules/jest-enzyme/lib/index.js"
+  "peerDependencies": {
+    "react": "^16.8.0"
   }
 }
