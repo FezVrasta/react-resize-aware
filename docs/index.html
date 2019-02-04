@@ -10,6 +10,7 @@
           sans-serif;
       }
       .example {
+        position: relative;
         background-color: rebeccapurple;
         height: 100px;
         width: 100%;
@@ -25,9 +26,29 @@
   <body>
     <div id="root"></div>
     <a href="https://github.com/fezvrasta/react-resize-aware">GitHub page</a>
-    <script src="https://unpkg.com/react@16.0.0/umd/react.production.min.js"></script>
-    <script src="https://unpkg.com/react-dom@16.0.0/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/react@16.8.0-alpha.1/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@16.8.0-alpha.1/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
     <script src="./react-resize-aware.js"></script>
-    <script src="./example.js"></script>
+    <script type="text/babel">
+      const App = () => {
+        const reporter = target => ({
+          width: target != null ? target.offsetWidth : null,
+          height: target != null ? target.offsetHeight : null,
+          clientWidth: target != null ? target.clientWidth : null,
+        });
+
+        const [ResizeListener, sizes] = useResizeAware(reporter);
+
+        return (
+          <div className="example">
+            <ResizeListener />
+            Your content here. (div sizes are {sizes.width} x {sizes.height}, clientWidth is {sizes.clientWidth}px)
+          </div>
+        );
+      };
+
+      ReactDOM.render(<App />, document.querySelector('#root'));
+    </script>
   </body>
 </html>
