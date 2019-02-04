@@ -9,13 +9,13 @@ It does one thing, it does it well: listens to resize events on any HTML element
 ## Installation
 
 ```
-yarn add react-resize-aware
+yarn add react-resize-aware@3.0.0-beta.1
 ```
 
 or with npm:
 
 ```
-npm install --save react-resize-aware
+npm install --save react-resize-aware@3.0.0-beta.1
 ```
 
 ## Usage
