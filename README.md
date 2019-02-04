@@ -6,6 +6,8 @@ It does one thing, it does it well: listens to resize events on any HTML element
 
 **It takes advantage of the `resize` event on the `HTMLObjectElement`, works on any browser I know of, and it's super lightweight.**
 
+In addition, it doesn't directly alters the DOM, everything is handled by React.
+
 ## Installation
 
 ```
