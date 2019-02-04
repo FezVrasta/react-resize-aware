@@ -15,7 +15,7 @@ export default function useResizeAware(
 
   const MemoResizeListener = React.useMemo(
     () => () => <ResizeListener onResize={onResize} />,
-    [setSizes, reporter]
+    [reporter]
   );
 
   return [MemoResizeListener, sizes];
