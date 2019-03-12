@@ -23,7 +23,7 @@ npm install --save react-resize-aware@3.0.0-beta.3
 ## Usage
 
 The API is simple yet powerful, the `useResizeAware` [Hook](https://reactjs.org/docs/hooks-reference.html)
-returns a component you will place inside the measured element, and an object containing its sizes:
+returns a React node you will place inside the measured element, and an object containing its sizes:
 
 ```jsx
 import React from 'react';
