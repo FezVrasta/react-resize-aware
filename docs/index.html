@@ -38,12 +38,13 @@
           clientWidth: target != null ? target.clientWidth : null,
         });
 
-        const [ResizeListener, sizes] = useResizeAware(reporter);
+        const [resizeListener, sizes] = useResizeAware(reporter);
 
         return (
           <div className="example">
-            <ResizeListener />
-            Your content here. (div sizes are {sizes.width} x {sizes.height}, clientWidth is {sizes.clientWidth}px)
+            {resizeListener}
+            Your content here. (div sizes are {sizes.width} x {sizes.height},
+            clientWidth is {sizes.clientWidth}px)
           </div>
         );
       };

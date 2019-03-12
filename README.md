@@ -11,13 +11,13 @@ In addition, it doesn't directly alters the DOM, everything is handled by React.
 ## Installation
 
 ```
-yarn add react-resize-aware@3.0.0-beta.1
+yarn add react-resize-aware@3.0.0-beta.3
 ```
 
 or with npm:
 
 ```
-npm install --save react-resize-aware@3.0.0-beta.1
+npm install --save react-resize-aware@3.0.0-beta.3
 ```
 
 ## Usage
@@ -30,11 +30,11 @@ import React from 'react';
 import useResizeAware from 'react-resize-aware';
 
 const App = () => {
-  const [ResizeListener, sizes] = useResizeAware();
+  const [resizeListener, sizes] = useResizeAware();
 
   return (
     <div style={{ position: 'relative' }}>
-      <ResizeListener />
+      {resizeListener}
       Your content here. (div sizes are {sizes.width} x {sizes.height})
     </div>
   );
@@ -47,11 +47,11 @@ const App = () => {
 
 The Hook returns an array with two elements inside:
 
-### `[ResizeListener, ...]` (first element)
+### `[resizeListener, ...]` (first element)
 
-This is an invisible component that must be placed as direct-child of the HTMLElement you want to listen the resize events of.
+This is an invisible React node that must be placed as direct-child of the HTMLElement you want to listen the resize events of.
 
-The component is not going to interfer with your layouts, I promise.
+The node is not going to interfer with your layouts, I promise.
 
 ### `[..., sizes]` (second element)
 
@@ -66,11 +66,11 @@ const customReporter = element => ({
   clientWidth: target != null ? target.clientWidth : null,
 });
 
-const [ResizeListener, sizes] = useResizeAware(customReporter);
+const [resizeListener, sizes] = useResizeAware(customReporter);
 
 return (
   <div style={{ position: 'relative' }}>
-    <ResizeListener />
+    {resizeListener}
     Your content here. (div clientWidth is {sizes.clientWidth})
   </div>
 );
