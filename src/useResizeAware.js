@@ -11,12 +11,13 @@ export default function useResizeAware(
   reporter: typeof defaultReporter = defaultReporter
 ) {
   const [sizes, setSizes] = React.useState({ width: null, height: null });
-  const onResize = ref => setSizes(reporter(ref.current));
-
-  const MemoResizeListener = React.useMemo(
-    () => () => <ResizeListener onResize={onResize} />,
-    [reporter]
+  const onResize = React.useCallback(ref => setSizes(reporter(ref.current)), [
+    reporter,
+  ]);
+  const resizeListenerNode = React.useMemo(
+    () => <ResizeListener onResize={onResize} />,
+    [onResize]
   );
 
-  return [MemoResizeListener, sizes];
+  return [resizeListenerNode, sizes];
 }

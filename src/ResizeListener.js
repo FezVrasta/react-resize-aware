@@ -23,13 +23,13 @@ export default ({
   onResize: (React.ElementRef<any>) => void,
 }) => {
   const ref = React.useRef();
-
-  useOnResize(ref, () => (onResize ? onResize(ref) : void 0));
+  useOnResize(ref, () => onResize(ref));
 
   return (
     <object
       type="text/html"
       style={style}
+      data="about:blank"
       ref={ref}
       aria-hidden={true}
       aria-label="resize-listener"
