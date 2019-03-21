@@ -6,7 +6,7 @@ import * as React from 'react';
 // The real Hook is `useResizeAware.js`
 export default (ref: React.ElementRef<any>, onResize: () => void) => {
   React.useEffect(() => {
-    const target = ref.current && ref.current.contentDocument.defaultView;
+    const target = ref.current && ref.current.contentDocument && ref.current.contentDocument.defaultView;
 
     // trigger onResize event on mount to provide initial sizes
     onResize();
