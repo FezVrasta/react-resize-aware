@@ -77,3 +77,23 @@ return (
 ```
 
 The above example will report the `clientWidth` rather than the default `offsetWidth` and `offsetHeight`.
+
+## React to size variations
+
+For completeness, below you can find an example to show how to make your code react to size variations using React Hooks:
+
+``jsx
+const App = () => {
+  const [resizeListener, sizes] = useResizeAware(customReporter);
+  
+  React.useEffect(() => {
+    console.log('Do something with the new size values');
+  }, [sizes.width, sizes.height]);
+
+  return (
+    <div style={{ position: 'relative' }}>
+      {resizeListener}
+      Your content here.
+    </div>
+  );
+}
