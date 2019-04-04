@@ -84,7 +84,7 @@ For completeness, below you can find an example to show how to make your code re
 
 ```jsx
 const App = () => {
-  const [resizeListener, sizes] = useResizeAware(customReporter);
+  const [resizeListener, sizes] = useResizeAware();
   
   React.useEffect(() => {
     console.log('Do something with the new size values');
