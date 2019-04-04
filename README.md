@@ -82,7 +82,7 @@ The above example will report the `clientWidth` rather than the default `offsetW
 
 For completeness, below you can find an example to show how to make your code react to size variations using React Hooks:
 
-``jsx
+```jsx
 const App = () => {
   const [resizeListener, sizes] = useResizeAware(customReporter);
   
@@ -97,3 +97,4 @@ const App = () => {
     </div>
   );
 }
+```
