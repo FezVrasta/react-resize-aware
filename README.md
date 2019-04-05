@@ -62,7 +62,7 @@ This object contains the `width` and `height` properties, these properties are g
 You can customize the properties of the `sizes` object by passing a custom `reporter` function as first argument of `useResizeAware`.
 
 ```jsx
-const customReporter = element => ({
+const customReporter = target => ({
   clientWidth: target != null ? target.clientWidth : null,
 });
 
