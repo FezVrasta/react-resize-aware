@@ -26,7 +26,7 @@ export default ({
   useOnResize(ref, () => onResize(ref));
 
   return (
-    <object
+    <iframe
       type="text/html"
       style={style}
       data="about:blank"
