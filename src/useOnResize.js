@@ -5,13 +5,20 @@ import * as React from 'react';
 // to a target HTMLObjectElement or HTMLIFrameElement
 // The real Hook is `useResizeAware.js`
 export default (ref: React.ElementRef<any>, onResize: () => void) => {
-  React.useEffect(() => {
-    const target = ref.current && ref.current.contentDocument && ref.current.contentDocument.defaultView;
-
+  const getTarget = () => ref.current && ref.current.contentDocument && ref.current.contentDocument.defaultView;
+  function run() {
     // trigger onResize event on mount to provide initial sizes
     onResize();
-
+    var target = getTarget();
     target && target.addEventListener('resize', onResize);
+  }
+  React.useEffect(() => {
+    if (getTarget()) {
+      run();
+    }
+    else if (ref.current && ref.current.addEventListener) {
+      ref.current.addEventListener('load', run)
+    }
 
     // clean event listener on unmount
     return () => {
