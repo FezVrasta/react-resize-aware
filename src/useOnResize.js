@@ -25,6 +25,7 @@ export default (ref: React.ElementRef<any>, onResize: () => void) => {
       // Ensure the target exists and is in fact an event listener
       // this fixes an issue where contentDocument.defaultView is not a real window object
       // as can be the case when used with React portals
+      const target = getTarget();
       const isListener =
         target && typeof target.removeEventListener === 'function';
 
