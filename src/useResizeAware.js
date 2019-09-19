@@ -10,7 +10,7 @@ const defaultReporter = (target: ?HTMLElement) => ({
 export default function useResizeAware(
   reporter: typeof defaultReporter = defaultReporter
 ) {
-  const [sizes, setSizes] = React.useState({ width: null, height: null });
+  const [sizes, setSizes] = React.useState(reporter(null));
   const onResize = React.useCallback(ref => setSizes(reporter(ref.current)), [
     reporter,
   ]);
