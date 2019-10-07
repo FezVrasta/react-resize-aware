@@ -31,6 +31,10 @@
     "start": "microbundle watch",
     "prepare": "microbundle --name useResizeAware --globals react=React --jsx React.createElement && cp -f dist/index.umd.js docs/react-resize-aware.js"
   },
+  "files": [
+    "dist/*",
+    "src/*"
+  ],
   "devDependencies": {
     "flow-bin": "^0.91.0",
     "microbundle": "^0.9.0",
