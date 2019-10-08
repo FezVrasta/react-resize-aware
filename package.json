@@ -24,8 +24,8 @@
     "react-component"
   ],
   "main": "dist/index.js",
-  "umd:main": "dist/foo.umd.js",
-  "module": "dist/foo.mjs",
+  "umd:main": "dist/index.umd.js",
+  "module": "dist/index.mjs",
   "source": "src/index.js",
   "scripts": {
     "start": "microbundle watch",
