@@ -27,13 +27,13 @@ export default ({
 
   return (
     <iframe
-      type="text/html"
       style={style}
-      data="about:blank"
+      src="about:blank"
       ref={ref}
       aria-hidden={true}
       aria-label="resize-listener"
       tabIndex={-1}
+      frameBorder={0}
     />
   );
 };
