@@ -13,13 +13,13 @@ In addition, it doesn't directly alters the DOM, everything is handled by React.
 ## Installation
 
 ```
-yarn add react-resize-aware@3.0.0-beta.4
+yarn add react-resize-aware
 ```
 
 or with npm:
 
 ```
-npm install --save react-resize-aware@3.0.0-beta.4
+npm install --save react-resize-aware
 ```
 
 ## Usage
