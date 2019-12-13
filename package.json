@@ -1,6 +1,6 @@
 {
   "name": "react-resize-aware",
-  "version": "3.0.0-beta.7",
+  "version": "3.0.0",
   "description": "A React hook that makes it possible to listen to element resize events.",
   "homepage": "https://github.com/FezVrasta/react-resize-aware#readme",
   "author": "Federico Zivolo <federico.zivolo@gmail.com>",
@@ -28,16 +28,17 @@
   "source": "src/index.js",
   "scripts": {
     "start": "microbundle watch",
-    "prepare": "microbundle --name useResizeAware --globals react=React --jsx React.createElement && cp -f dist/index.umd.js docs/react-resize-aware.js"
+    "prepare": "microbundle --name useResizeAware --globals react=React --jsx React.createElement && cp -f dist/index.umd.js docs/react-resize-aware.js && flow-copy-source src dist"
   },
   "files": [
     "dist/*",
     "src/*"
   ],
   "devDependencies": {
-    "flow-bin": "^0.91.0",
-    "microbundle": "^0.9.0",
-    "react": "16.8.0-alpha.1"
+    "flow-bin": "^0.113.0",
+    "flow-copy-source": "^2.0.9",
+    "microbundle": "0.12.0-next.6",
+    "react": "16.12.0"
   },
   "peerDependencies": {
     "react": "^16.8.0"
