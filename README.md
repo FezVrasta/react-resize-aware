@@ -2,7 +2,7 @@
 
 It does one thing, it does it well: listens to resize events on any HTML element.
 
-`react-resize-aware` is a zero dependency, **~400 bytes** [React Hook](https://reactjs.org/docs/hooks-reference.html) you can use to detect resize events without relying on intervals, loops, DOM manipulation detection or CSS redraws.
+`react-resize-aware` is a zero dependency, **~600 bytes** [React Hook](https://reactjs.org/docs/hooks-reference.html) you can use to detect resize events without relying on intervals, loops, DOM manipulation detection or CSS redraws.
 
 **It takes advantage of the `resize` event on the `HTMLObjectElement`, works on any browser I know of, and it's super lightweight.**
 
