@@ -1,6 +1,6 @@
 {
   "name": "react-resize-aware",
-  "version": "3.1.0",
+  "version": "3.1.1",
   "description": "A React hook that makes it possible to listen to element resize events.",
   "homepage": "https://github.com/FezVrasta/react-resize-aware#readme",
   "author": "Federico Zivolo <federico.zivolo@gmail.com>",
