@@ -13,6 +13,8 @@ const style = {
   overflow: 'hidden',
   pointerEvents: 'none',
   zIndex: -1,
+  maxHeight: 'inherit',
+  maxWidth: 'inherit',
 };
 
 // This automatically attaches to itself the resize event listener
