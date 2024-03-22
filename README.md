@@ -28,16 +28,16 @@ The API is simple yet powerful, the `useResizeAware` [Hook](https://reactjs.org/
 returns a React node you will place inside the measured element, and an object containing its sizes:
 
 ```jsx
-import React from 'react';
-import useResizeAware from 'react-resize-aware';
+import React from "react";
+import useResizeAware from "react-resize-aware";
 
 const App = () => {
   const [resizeListener, sizes] = useResizeAware();
 
   return (
-    <div style={{ position: 'relative' }}>
+    <div style={{ position: "relative" }}>
       {resizeListener}
-      Your content here. (div sizes are {sizes.width} x {sizes.height})
+      Your content here. (div sizes are {sizes?.width} x {sizes?.height})
     </div>
   );
 };
@@ -57,21 +57,21 @@ The node is not going to interfer with your layouts, I promise.
 
 ### `[..., sizes]` (second element)
 
-This object contains the `width` and `height` properties, these properties are going to be `null` before the component rendered, and will return a `number` after the component rendered.
+This object contains the `width` and `height` properties, it could be `null` if the element is not yet rendered.
 
 ## Custom `reporter`
 
 You can customize the properties of the `sizes` object by passing a custom `reporter` function as first argument of `useResizeAware`.
 
-```jsx
-const customReporter = target => ({
-  clientWidth: target != null ? target.clientWidth : null,
+```tsx
+const customReporter = (target: ?HTMLIFrameElement) => ({
+  clientWidth: target != null ? target.clientWidth : 0,
 });
 
 const [resizeListener, sizes] = useResizeAware(customReporter);
 
 return (
-  <div style={{ position: 'relative' }}>
+  <div style={{ position: "relative" }}>
     {resizeListener}
     Your content here. (div clientWidth is {sizes.clientWidth})
   </div>
@@ -87,16 +87,16 @@ For completeness, below you can find an example to show how to make your code re
 ```jsx
 const App = () => {
   const [resizeListener, sizes] = useResizeAware();
-  
+
   React.useEffect(() => {
-    console.log('Do something with the new size values');
+    console.log("Do something with the new size values");
   }, [sizes.width, sizes.height]);
 
   return (
-    <div style={{ position: 'relative' }}>
+    <div style={{ position: "relative" }}>
       {resizeListener}
       Your content here.
     </div>
   );
-}
+};
 ```

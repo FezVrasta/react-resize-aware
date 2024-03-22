@@ -1,19 +1,33 @@
 // @flow
-import * as React from 'react';
-import ResizeListener from './ResizeListener';
+import * as React from "react";
+import ResizeListener from "./ResizeListener";
 
-const defaultReporter = (target: ?HTMLElement) => ({
-  width: target != null ? target.offsetWidth : null,
-  height: target != null ? target.offsetHeight : null,
-});
+type Reporter<T> = (target: ?HTMLIFrameElement) => T;
+
+const defaultReporter = (target: ?HTMLIFrameElement) =>
+  target != null
+    ? {
+        width: target.offsetWidth,
+        height: target.offsetHeight,
+      }
+    : null;
+
+declare export default function useResizeAware(): [
+  React.Node,
+  ?{ width: number, height: number }
+];
+declare export default function useResizeAware<T>(
+  reporter: Reporter<T>
+): [React.Node, T];
 
 export default function useResizeAware(
-  reporter: typeof defaultReporter = defaultReporter
+  reporter?: Reporter<mixed> = defaultReporter
 ) {
   const [sizes, setSizes] = React.useState(reporter(null));
-  const onResize = React.useCallback(ref => setSizes(reporter(ref.current)), [
-    reporter,
-  ]);
+  const onResize = React.useCallback(
+    (ref) => setSizes(reporter(ref.current)),
+    [reporter]
+  );
   const resizeListenerNode = React.useMemo(
     () => <ResizeListener onResize={onResize} />,
     [onResize]

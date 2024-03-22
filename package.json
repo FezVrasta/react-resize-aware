@@ -1,6 +1,6 @@
 {
   "name": "react-resize-aware",
-  "version": "3.1.3",
+  "version": "4.0.0",
   "description": "A React hook that makes it possible to listen to element resize events.",
   "homepage": "https://github.com/FezVrasta/react-resize-aware#readme",
   "author": "Federico Zivolo <federico.zivolo@gmail.com>",
@@ -23,21 +23,26 @@
     "query",
     "react-component"
   ],
-  "main": "dist/index.js",
-  "umd:main": "dist/index.umd.js",
-  "source": "src/index.js",
+  "type": "module",
+  "main": "./dist/index.umd.js",
+  "module": "./dist/index.modern.js",
+  "source": "./src/index.js",
+  "exports": {
+    "require": "./dist/index.cjs",
+    "default": "./dist/index.modern.js"
+  },
   "scripts": {
     "start": "microbundle watch",
-    "prepare": "microbundle --name useResizeAware --jsx jsx --jsxImportSource react --globals react/jsx-runtime=jsx && cp -f dist/index.umd.js docs/react-resize-aware.js && flow-copy-source src dist && cp src/index.d.ts dist/index.d.ts"
+    "prepare": "rm -rf dist && microbundle --jsx 'React.createElement' --jsxImportSource react --globals react/jsx-runtime=jsx && flow-copy-source src dist && cp ./dist/index.js.flow ./dist/index.umd.js.flow && cp ./src/index.d.ts ./dist"
   },
   "files": [
     "dist/*",
     "src/*"
   ],
   "devDependencies": {
-    "flow-bin": "^0.113.0",
+    "flow-bin": "0.199.1",
     "flow-copy-source": "^2.0.9",
-    "microbundle": "0.12.0-next.6",
+    "microbundle": "^0.15.1",
     "react": "16.12.0"
   },
   "peerDependencies": {

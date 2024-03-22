@@ -1,2 +1,3 @@
 // @flow
-export { default } from './useResizeAware';
+import useResizeAware from "./useResizeAware";
+export default useResizeAware;
